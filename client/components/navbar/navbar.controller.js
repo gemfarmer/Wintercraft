@@ -5,6 +5,12 @@ angular.module('wintercraftApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },{
+      'title': 'Specs',
+      'link': '/specs'
+    },{
+      'title': 'Presets',
+      'link': '/presets'
     }];
 
     $scope.isCollapsed = true;

@@ -12,6 +12,14 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
+  presets: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Preset'
+  },
+  settings: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Setting'
+  },
   hashedPassword: String,
   provider: String,
   salt: String,

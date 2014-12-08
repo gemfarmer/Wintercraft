@@ -11,13 +11,22 @@
 
 var _ = require('lodash');
 var Thing = require('./thing.model');
+var request = require('request');
 
 // Get list of things
 exports.index = function(req, res) {
-  Thing.find(function (err, things) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, things);
-  });
+  // Thing.find(function (err, things) {
+  //   if(err) { return handleError(res, err); }
+  //   return res.json(200, things);
+  // });
+  //
+  // var geoLookupUrl = "http://api.wunderground.com/api/68fc40cc59b03c11/geolookup/q/autoip.json";
+  // var MinneapolisLookupUrl = "http://api.wunderground.com/api/68fc40cc59b03c11/geolookup/q/Minneapolis Crystal.json";
+  // var demoUrl = 'http://api.wunderground.com/api/68fc40cc59b03c11/conditions/q/CA/San_Francisco.json'
+  // request(geoLookupUrl,function(request,response){
+  //   console.log('data: ', response.body)
+  //   return res.json(200,response.body)
+  // });
 };
 
 // Get a single thing

@@ -1,0 +1,89 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Lantern Specs</h3>
+      <p>Customize your lantern</p>
+    </div>
+    <div class="col-sm-12">
+      <form class="form" name="form" ng-submit="submit(form)" novalidate>
+
+        <div class="form-group">
+          <label>Batch Name</label>
+
+          <input type="text" name="name" class="form-control" ng-model="specs.name">
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+
+          <textarea type="text" name="description" class="form-control" ng-model="specs.description"></textarea>
+        </div>
+        <h2>Location Method</h2>
+
+        <div class="form-group">
+          <label>Zip Code</label>
+
+          <input type="text" name="zip" class="form-control" ng-model="specs.zip">
+        </div>
+        <h2>Sizing Method</h2>
+        <div class="form-group">
+          <label>Weight</label>
+
+          <input type="text" name="weight" class="form-control" ng-model="specs.weight">
+        </div>
+
+        <div class="form-group">
+          <label>Diameter</label>
+
+          <input type="text" name="diameter" class="form-control" ng-model="specs.diameter">
+        </div>
+
+        <div class="form-group">
+          <label>Strip Length</label>
+
+          <input type="text" name="strip" class="form-control" ng-model="specs.strip">
+        </div>
+
+        <h2>Alert Method</h2>
+        <div class="form-group">
+          <label>Email</label>
+
+          <input type="email" name="email" class="form-control" ng-model="specs.email">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+
+          <input type="text" name="phone" class="form-control" ng-model="specs.phone">
+        </div>
+
+        <div class="form-group has-error">
+          <p class="help-block" ng-show="form.email.$error.email && submitted">
+             Please enter a valid email.
+          </p>
+
+          <p class="help-block">{{ errors.other }}</p>
+        </div>
+
+        <div>
+          <button class="btn btn-primary btn-lg btn-login" type="submit">
+            Save
+          </button>
+
+        </div>
+
+        <div class="form-group has-success">
+          <p class="help-block" ng-show="saveMessage && submitted">
+             Your profile has been saved!
+          </p>
+
+
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+  <hr>
+</div>
