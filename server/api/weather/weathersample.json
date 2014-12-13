@@ -1,0 +1,351 @@
+
+{
+  "response": {
+  "version":"0.1",
+  "termsofService":"http://www.wunderground.com/weather/api/d/terms.html",
+  "features": {
+  "geolookup": 1
+  }
+	}
+		,	"location": {
+		"type":"CITY",
+		"country":"US",
+		"country_iso3166":"US",
+		"country_name":"USA",
+		"state":"MN",
+		"city":"Minneapolis",
+		"tz_short":"CST",
+		"tz_long":"America/Chicago",
+		"lat":"44.98550034",
+		"lon":"-93.27189636",
+		"zip":"55401",
+		"magic":"1",
+		"wmo":"99999",
+		"l":"/q/zmw:55401.1.99999",
+		"requesturl":"US/MN/Minneapolis.html",
+		"wuiurl":"http://www.wunderground.com/US/MN/Minneapolis.html",
+		"nearby_weather_stations": {
+		"airport": {
+		"station": [
+		{ "city":"Minneapolis Crystal", "state":"MN", "country":"US", "icao":"KMIC", "lat":"45.06250000", "lon":"-93.35083008" }
+		,{ "city":"Minneapolis", "state":"MN", "country":"US", "icao":"KMSP", "lat":"44.88536835", "lon":"-93.23130798" }
+		,{ "city":"St. Paul", "state":"MN", "country":"US", "icao":"KSTP", "lat":"44.93447113", "lon":"-93.05999756" }
+		,{ "city":"Anoka County", "state":"MN", "country":"US", "icao":"KANE", "lat":"45.14257812", "lon":"-93.21272278" }
+		]
+		}
+		,
+		"pws": {
+		"station": [
+		{
+		"neighborhood":"North Loop",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE88",
+		"lat":44.989632,
+		"lon":-93.278267,
+		"distance_km":0,
+		"distance_mi":0
+		},
+		{
+		"neighborhood":"Central Minneapolis",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE124",
+		"lat":44.971710,
+		"lon":-93.281563,
+		"distance_km":1,
+		"distance_mi":1
+		},
+		{
+		"neighborhood":"Marcy-Holmes",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE118",
+		"lat":44.986408,
+		"lon":-93.246742,
+		"distance_km":1,
+		"distance_mi":1
+		},
+		{
+		"neighborhood":"Whittier",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE70",
+		"lat":44.960403,
+		"lon":-93.284660,
+		"distance_km":2,
+		"distance_mi":1
+		},
+		{
+		"neighborhood":"North Isles",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE115",
+		"lat":44.964130,
+		"lon":-93.300148,
+		"distance_km":3,
+		"distance_mi":1
+		},
+		{
+		"neighborhood":"Uptown - East Isles",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE60",
+		"lat":44.952923,
+		"lon":-93.303101,
+		"distance_km":4,
+		"distance_mi":2
+		},
+		{
+		"neighborhood":"Lyn-Lake",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE80",
+		"lat":44.942684,
+		"lon":-93.291069,
+		"distance_km":4,
+		"distance_mi":2
+		},
+		{
+		"neighborhood":"Northeast Minneapolis",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE68",
+		"lat":45.024330,
+		"lon":-93.238762,
+		"distance_km":5,
+		"distance_mi":3
+		},
+		{
+		"neighborhood":"Sunset Gables",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE56",
+		"lat":44.952751,
+		"lon":-93.325752,
+		"distance_km":5,
+		"distance_mi":3
+		},
+		{
+		"neighborhood":"Pleasant Street",
+		"city":"Lauderdale",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNLAUDE2",
+		"lat":44.997868,
+		"lon":-93.200119,
+		"distance_km":5,
+		"distance_mi":3
+		},
+		{
+		"neighborhood":"Kingfield - 38th",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE67",
+		"lat":44.933300,
+		"lon":-93.278435,
+		"distance_km":5,
+		"distance_mi":3
+		},
+		{
+		"neighborhood":"Edgemoore Park",
+		"city":"Columbia Heights",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNCOLUM3",
+		"lat":45.041115,
+		"lon":-93.267265,
+		"distance_km":6,
+		"distance_mi":3
+		},
+		{
+		"neighborhood":"Howe",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE114",
+		"lat":44.938683,
+		"lon":-93.227737,
+		"distance_km":6,
+		"distance_mi":3
+		},
+		{
+		"neighborhood":"Robbinsdale, NW Shore of Crystal Lake",
+		"city":"Robbinsdale",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNROBBI4",
+		"lat":45.027187,
+		"lon":-93.331306,
+		"distance_km":6,
+		"distance_mi":3
+		},
+		{
+		"neighborhood":"Kingfield",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE51",
+		"lat":44.926006,
+		"lon":-93.290405,
+		"distance_km":6,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"France Ave N, near Sanborn Park",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE86",
+		"lat":45.033810,
+		"lon":-93.329414,
+		"distance_km":7,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"Robbinsdale Middle School",
+		"city":"Robbinsdale",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE28",
+		"lat":45.022762,
+		"lon":-93.346420,
+		"distance_km":7,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"Historic Watson House",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE71",
+		"lat":44.933918,
+		"lon":-93.329407,
+		"distance_km":7,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"Linden Hills",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE53",
+		"lat":44.928345,
+		"lon":-93.323204,
+		"distance_km":7,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"Minikada Vista",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE101",
+		"lat":44.933510,
+		"lon":-93.336311,
+		"distance_km":7,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"Minikahda Vista",
+		"city":"St. Louis Park",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNSTLOU3",
+		"lat":44.932632,
+		"lon":-93.334961,
+		"distance_km":7,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"Hiawatha Golf Course",
+		"city":"MInneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE57",
+		"lat":44.916759,
+		"lon":-93.245140,
+		"distance_km":7,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"Blair Manor, Midway",
+		"city":"St Paul",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNSTPAU11",
+		"lat":44.961349,
+		"lon":-93.173012,
+		"distance_km":8,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"AC Columbia Heights",
+		"city":"Columbia Heights",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNCOLUM2",
+		"lat":45.053513,
+		"lon":-93.227501,
+		"distance_km":8,
+		"distance_mi":4
+		},
+		{
+		"neighborhood":"Dupont Ave",
+		"city":"Brooklyn Center",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNBROOK12",
+		"lat":45.059422,
+		"lon":-93.294136,
+		"distance_km":8,
+		"distance_mi":5
+		},
+		{
+		"neighborhood":"Groveland Park",
+		"city":"St Paul",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNSTPAU9",
+		"lat":44.936001,
+		"lon":-93.186432,
+		"distance_km":8,
+		"distance_mi":5
+		},
+		{
+		"neighborhood":"Hale",
+		"city":"Minneapolis",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNMINNE117",
+		"lat":44.906921,
+		"lon":-93.254646,
+		"distance_km":8,
+		"distance_mi":5
+		},
+		{
+		"neighborhood":"Mac-Grove",
+		"city":"Saint Paul",
+		"state":"MN",
+		"country":"US",
+		"id":"KMNSAINT9",
+		"lat":44.933689,
+		"lon":-93.186493,
+		"distance_km":8,
+		"distance_mi":5
+		}
+		]
+		}
+		}
+	}
+}
