@@ -1,9 +1,11 @@
 'use strict';
 
 var User = require('./user.model');
+var Setting = require('./../setting/setting.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var mongoose = require('mongoose');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -25,13 +27,29 @@ exports.index = function(req, res) {
  */
 exports.create = function (req, res, next) {
   var newUser = new User(req.body);
+  var newSetting = new Setting();
+
   newUser.provider = 'local';
   newUser.role = 'user';
-  newUser.save(function(err, user) {
-    if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
+
+  console.log('new User',newUser)
+  newSetting.save(function(err, setting) {
+    if (err) {
+      return validationError(res, err);
+    } else {
+      console.log('setting', setting)
+      newUser.settings = mongoose.Types.ObjectId(setting._id);
+      console.log('new',newUser)
+      newUser.save(function(err, user) {
+        console.log('user',user, err)
+        if (err) return validationError(res, err);
+        var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+        res.json({ token: token });
+      });
+    }
+
   });
+
 };
 
 /**

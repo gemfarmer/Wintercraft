@@ -13,12 +13,12 @@ var UserSchema = new Schema({
     default: 'user'
   },
   presets: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Preset'
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "Preset"
   },
   settings: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Setting'
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "Setting"
   },
   hashedPassword: String,
   provider: String,

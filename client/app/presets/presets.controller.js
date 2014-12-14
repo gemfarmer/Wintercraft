@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('wintercraftApp')
-  .controller('PresetsCtrl', ['$scope', '$http', 'User', function ($scope, $http,User) {
+  .controller('PresetsCtrl', ['$scope', '$http', '$rootScope', 'User', function ($scope, $http, $rootScope, User) {
     $scope.message = 'Hello';
     $scope.presets = {};
 
@@ -21,11 +21,18 @@ angular.module('wintercraftApp')
         //   },2000);
         // });
         //
-        console.log($scope.presets)
+        console.log("scope presets: ",$scope.presets, $scope)
         $http.post('/api/preset', $scope.presets).success(function(presets) {
           console.log('presets',presets)
-          var currentUser = User.get()
-          console.log(currentUser)
+          console.log('currentUser: ', $rootScope.currentUser)
+          // User.changePresets({ id: $rootScope.currentUser._id }, { presets:presets}, function(user) {
+          //   console.log('user', user);
+          //   // return cb(user);
+          // }, function(err) {
+          //   // return cb(err);
+          //   console.log('err',err)
+          // });
+          // $http.put('/api/presets', presets)
         });
 
       }

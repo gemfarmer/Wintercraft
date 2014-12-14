@@ -12,6 +12,18 @@ angular.module('wintercraftApp')
           controller:'password'
         }
       },
+      // changeSettings:{
+      //   method: 'PUT',
+      //   params: {
+      //     controller:'settings'
+      //   }
+      // },
+      // changePresets:{
+      //   method: 'PUT',
+      //   params: {
+      //     controller:'presets'
+      //   }
+      // },
       get: {
         method: 'GET',
         params: {

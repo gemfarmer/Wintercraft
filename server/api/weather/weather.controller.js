@@ -3,16 +3,22 @@
 var _ = require('lodash');
 var Weather = require('./weather.model');
 var request = require('request');
+
 // Get list of weathers
 exports.index = function(req, res) {
   // Weather.find(function (err, weathers) {
   //   if(err) { return handleError(res, err); }
   //   return res.json(200, weathers);
   // });
+  //
+  //
 
-  var geoLookupUrl = "http://api.wunderground.com/api/68fc40cc59b03c11/geolookup/q/autoip.json";
-  var MinneapolisLookupUrl = "http://api.wunderground.com/api/68fc40cc59b03c11/geolookup/q/Minneapolis Crystal.json";
-  var demoUrl = 'http://api.wunderground.com/api/68fc40cc59b03c11/conditions/q/CA/San_Francisco.json'
+  var zip = 53434
+  var apiKey = '68fc40cc59b03c11';
+  var geoLookupUrl = "http://api.wunderground.com/api/"+apiKey+"/geolookup/q/autoip.json";
+  var MinneapolisLookupUrl = "http://api.wunderground.com/api/"+apiKey+"/geolookup/q/Minneapolis Crystal.json";
+  var demoUrl = 'http://api.wunderground.com/api/'+apiKey+'/conditions/q/CA/San_Francisco.json'
+
   request(geoLookupUrl,function(request,response){
 
     console.log('data: ', response.body)

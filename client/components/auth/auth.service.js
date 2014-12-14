@@ -5,6 +5,7 @@ angular.module('wintercraftApp')
     var currentUser = {};
     if($cookieStore.get('token')) {
       currentUser = User.get();
+      $rootScope.currentUser = currentUser;
     }
 
     return {

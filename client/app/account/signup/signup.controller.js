@@ -6,15 +6,14 @@ angular.module('wintercraftApp')
     $scope.errors = {};
 
     $scope.register = function(form) {
+      console.log('register!!!!!!!!!!!')
       $scope.submitted = true;
 
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
           email: $scope.user.email,
-          password: $scope.user.password,
-          settings: {},
-          presets: {}
+          password: $scope.user.password
         })
         .then( function() {
           // Account created, redirect to home
