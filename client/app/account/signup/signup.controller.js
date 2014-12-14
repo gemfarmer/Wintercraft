@@ -6,7 +6,7 @@ angular.module('wintercraftApp')
     $scope.errors = {};
 
     $scope.register = function(form) {
-      console.log('register!!!!!!!!!!!')
+      console.log('register!!!!!!!!!!!');
       $scope.submitted = true;
 
       if(form.$valid) {

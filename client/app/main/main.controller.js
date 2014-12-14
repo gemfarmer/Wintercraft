@@ -4,7 +4,7 @@ angular.module('wintercraftApp')
   .controller('MainCtrl', function ($scope, $http, User) {
     $scope.awesomeThings = [];
     $scope.user = User.get();
-    console.log($scope.user)
+    console.log($scope.user);
     // $http.get('/api/things').success(function(awesomeThings) {
     //   console.log('awesome things',JSON.parse(awesomeThings))
 

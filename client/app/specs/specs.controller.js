@@ -7,7 +7,7 @@ angular.module('wintercraftApp')
 
 
     $http.get('/api/weathers').success(function(weather) {
-      console.log('awesome things',JSON.parse(weather))
+      console.log('awesome weather',JSON.parse(weather))
 
       $scope.weather = weather;
     });

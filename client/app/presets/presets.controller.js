@@ -21,10 +21,10 @@ angular.module('wintercraftApp')
         //   },2000);
         // });
         //
-        console.log("scope presets: ",$scope.presets, $scope)
+        console.log('scope presets: ',$scope.presets, $scope);
         $http.post('/api/preset', $scope.presets).success(function(presets) {
-          console.log('presets',presets)
-          console.log('currentUser: ', $rootScope.currentUser)
+          console.log('presets',presets);
+          console.log('currentUser: ', $rootScope.currentUser);
           // User.changePresets({ id: $rootScope.currentUser._id }, { presets:presets}, function(user) {
           //   console.log('user', user);
           //   // return cb(user);
