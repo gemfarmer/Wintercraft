@@ -51,22 +51,49 @@ exports.index = function(req, res) {
         }
         tempArray.push(dataPoint);
       });
-      console.log(tempArray)
+        
+        //NOTE: tempArrays first temp field is vacant, not sure how to fix this) ///
+     
+        
+    //setting up variables    
+    var pi = Math.PI     
+    var diameter = 40; //cm; should be user input
+    var radius = diameter/2;
+    var volume = 4/3*pi*Math.pow(radius,3);
+    var surfaceArea = 4 * pi * radius * radius; //cm^2
+    var surfaceAreaInSquareMeters = surfaceArea/100 //m^2
+    var weight = .9997 * volume; //grams
+    var tempStart = 13;  //estimated tap water temperature
+    var tempEnd = 0;  //freezing point
+    var heatTransferCoefficent = 3.5; ///We have no idea what this is, it will be our primary means of adjusting the model to fit data
+    var tempCurrent = tempStart;
+    
+   //Doing the first fractional hour     
+    var hour=0;
+    var momentTime=moment().format();
+    var currentMinute = momentTime.slice(-11,-9);
+        
+    var percentHourRemaining=(60-currentMinute)/60;
+    var energyChangeFirstHour=  percentHourRemaining*3600*(tempCurrent - tempArray[1].temp)*heatTransferCoefficent;  //should be                                                                                           tempArray[0], but as in line 55's note, that data isn't there
+    var tempEndOfFirstHour = tempCurrent-energyChangeFirstHour/(4.186 * weight);
+    tempCurrent = tempEndOfFirstHour;
 
-      //function to calculate expected freezing time
+    //doing the rest of the hours
+    hour=1;
+    var energyChangeHourly;
+    while (tempCurrent > tempEnd) {
+        energyChangeHourly = 3600*(tempCurrent - tempArray[hour].temp)*heatTransferCoefficent;  //currently does not include surface area
+        tempCurrent = tempCurrent - energyChangeHourly / (4.186 * weight)
+        
+       hour = hour + 1;
+    }
+        
 
-      //calculate time from array and diameter
-    // r= (1/2)d (convert to centimeters)
-    // V = (4/3)pi r^2 (cm^3)
-    // SA = 4 pi r^2 (cm)
-    // Weight = .9997 * V  (g)
-    // T start = 13 deg C (est. tap water temperature)
-    // T end = 0 deg C
-    // ^Q per second = T start * 4.186 * weight  (joules)
-    // h = 3.5 (adjustable heat constant)
- // calculates temp change over an hour for each hour, calculate ^Q hourly =3600(Tcurrent - Tambient)(h)(SA/10000) then take Tcurrent = Tcurrent- ^Qhourly/(4.186*weight
-// when Tcurrent <0, take currenthour - currenthour(Tstart)/(Tstart-Tcurrent) = time to freeze completely
-// take 70% of time to freeze completely
+var extraFractionHour = (0-tempCurrent)/(energyChangeHourly/(4.186 * weight));  //adjusts for fractional hour at end
+var timeComplete=(currentMinute/60)+(hour-1) - extraFractionHour;
+var time70 = .7* timeComplete; //time to freeze 70%, final answer
+
+console.log(time70)
 
       return res.json(200,response2.body)
     })
