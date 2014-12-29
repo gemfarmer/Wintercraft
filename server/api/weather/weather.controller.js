@@ -5,6 +5,50 @@ var Weather = require('./weather.model');
 var request = require('request');
 var moment = require('moment');
 
+// tempArray is array of next 16 days of temps, weight (g), diameter (cm), lineLength (cm)
+var calcTimeToCompletion = function(tempArray, diameter, weight,lineLength){
+  //setting up variables
+    var pi = Math.PI
+    var radius = diameter/2;
+    var volume = 4/3*pi*Math.pow(radius,3);
+    var surfaceArea = 4 * pi * radius * radius; //cm^2
+    var surfaceAreaInSquareMeters = surfaceArea/100 //m^2
+    var weight = .9997 * volume; //grams
+    var tempStart = 13;  //estimated tap water temperature
+    var tempEnd = 0;  //freezing point
+    var heatTransferCoefficent = 3.5; ///We have no idea what this is, it will be our primary means of adjusting the model to fit data
+    var tempCurrent = tempStart;
+
+   //Doing the first fractional hour
+    var hour=0;
+    var momentTime=moment().format();
+    var currentMinute = momentTime.slice(-11,-9);
+
+    var percentHourRemaining=(60-currentMinute)/60;
+    var energyChangeFirstHour=  percentHourRemaining*3600*(tempCurrent - tempArray[1].temp)*heatTransferCoefficent;  //should be                                                                                           tempArray[0], but as in line 55's note, that data isn't there
+    var tempEndOfFirstHour = tempCurrent-energyChangeFirstHour/(4.186 * weight);
+    tempCurrent = tempEndOfFirstHour;
+
+    //doing the rest of the hours
+    hour=1;
+    var energyChangeHourly;
+    while (tempCurrent > tempEnd) {
+        energyChangeHourly = 3600*(tempCurrent - tempArray[hour].temp)*heatTransferCoefficent;  //currently does not include surface area
+        tempCurrent = tempCurrent - energyChangeHourly / (4.186 * weight)
+
+       hour = hour + 1;
+    }
+
+
+    var extraFractionHour = (0-tempCurrent)/(energyChangeHourly/(4.186 * weight));  //adjusts for fractional hour at end
+    var timeComplete=(currentMinute/60)+(hour-1) - extraFractionHour;
+    var time70 = .7* timeComplete; //time to freeze 70%, final answer
+
+    console.log(time70)
+    return time70;
+
+}
+
 // Get list of weathers
 exports.index = function(req, res) {
   // Weather.find(function (err, weathers) {
@@ -51,49 +95,9 @@ exports.index = function(req, res) {
         }
         tempArray.push(dataPoint);
       });
-        
-        //NOTE: tempArrays first temp field is vacant, not sure how to fix this) ///
-     
-        
-    //setting up variables    
-    var pi = Math.PI     
-    var diameter = 40; //cm; should be user input
-    var radius = diameter/2;
-    var volume = 4/3*pi*Math.pow(radius,3);
-    var surfaceArea = 4 * pi * radius * radius; //cm^2
-    var surfaceAreaInSquareMeters = surfaceArea/100 //m^2
-    var weight = .9997 * volume; //grams
-    var tempStart = 13;  //estimated tap water temperature
-    var tempEnd = 0;  //freezing point
-    var heatTransferCoefficent = 3.5; ///We have no idea what this is, it will be our primary means of adjusting the model to fit data
-    var tempCurrent = tempStart;
-    
-   //Doing the first fractional hour     
-    var hour=0;
-    var momentTime=moment().format();
-    var currentMinute = momentTime.slice(-11,-9);
-        
-    var percentHourRemaining=(60-currentMinute)/60;
-    var energyChangeFirstHour=  percentHourRemaining*3600*(tempCurrent - tempArray[1].temp)*heatTransferCoefficent;  //should be                                                                                           tempArray[0], but as in line 55's note, that data isn't there
-    var tempEndOfFirstHour = tempCurrent-energyChangeFirstHour/(4.186 * weight);
-    tempCurrent = tempEndOfFirstHour;
 
-    //doing the rest of the hours
-    hour=1;
-    var energyChangeHourly;
-    while (tempCurrent > tempEnd) {
-        energyChangeHourly = 3600*(tempCurrent - tempArray[hour].temp)*heatTransferCoefficent;  //currently does not include surface area
-        tempCurrent = tempCurrent - energyChangeHourly / (4.186 * weight)
-        
-       hour = hour + 1;
-    }
-        
-
-var extraFractionHour = (0-tempCurrent)/(energyChangeHourly/(4.186 * weight));  //adjusts for fractional hour at end
-var timeComplete=(currentMinute/60)+(hour-1) - extraFractionHour;
-var time70 = .7* timeComplete; //time to freeze 70%, final answer
-
-console.log(time70)
+      //NOTE: tempArrays first temp field is vacant, not sure how to fix this) ///
+      calcTimeToCompletion(tempArray, 40);
 
       return res.json(200,response2.body)
     })
