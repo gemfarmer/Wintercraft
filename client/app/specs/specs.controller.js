@@ -32,7 +32,7 @@ angular.module('wintercraftApp')
 
           $http.post('/api/weathers', settings).success(function(weather) {
             console.log('awesome weather',weather)
-
+            $scope.timeToFreeze = weather.time;
             $scope.weather = weather;
           });
 
