@@ -3,18 +3,41 @@
 angular.module('wintercraftApp')
   .controller('SpecsCtrl', ['$scope','$http',function ($scope, $http) {
     $scope.message = 'Hello';
-    $scope.specs = {};
 
 
-    $http.get('/api/weathers').success(function(weather) {
-      console.log('awesome weather',JSON.parse(weather))
-
-      $scope.weather = weather;
-    });
     $scope.submit = function(form) {
       $scope.submitted = true;
 
       if(form.$valid) {
+        console.log('form',$scope.specs)
+        var settings = {
+          sizing: {
+            weight: $scope.specs.weight,
+            diameter: $scope.specs.diameter,
+            length: $scope.specs.strip
+          },
+          location: {
+            zip: $scope.specs.zip
+          }
+        }
+        // $http.post('/api/settings', settings).success(function(response){
+        //   console.log('promise',response)
+
+          // $http.get('/api/weathers', settings).success(function(weather) {
+          //   console.log('awesome weather',JSON.parse(weather))
+
+          //   $scope.weather = weather;
+          // });
+
+
+          $http.post('/api/weathers', settings).success(function(weather) {
+            console.log('awesome weather',weather)
+
+            $scope.weather = weather;
+          });
+
+        // })
+
 
 
         // User.update(id, updatedUser,function(req,res){

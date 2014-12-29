@@ -4,6 +4,8 @@ var _ = require('lodash');
 var Weather = require('./weather.model');
 var request = require('request');
 var moment = require('moment');
+var User = require('./../user/user.model');
+var Setting = require('./../setting/setting.model');
 
 // tempArray is array of next 16 days of temps, weight (g), diameter (cm), lineLength (cm)
 var calcTimeToCompletion = function(tempArray, diameter, weight,lineLength){
@@ -32,19 +34,19 @@ var calcTimeToCompletion = function(tempArray, diameter, weight,lineLength){
     //doing the rest of the hours
     hour=1;
     var energyChangeHourly;
-    while (tempCurrent > tempEnd) {
-        energyChangeHourly = 3600*(tempCurrent - tempArray[hour].temp)*heatTransferCoefficent;  //currently does not include surface area
-        tempCurrent = tempCurrent - energyChangeHourly / (4.186 * weight)
 
-       hour = hour + 1;
-    }
+    for (var hour = 1; hour < tempArray.length && (tempCurrent > tempEnd); hour++) {
+      energyChangeHourly = 3600*(tempCurrent - tempArray[hour].temp)*heatTransferCoefficent;  //currently does not include surface area
+      tempCurrent = tempCurrent - energyChangeHourly / (4.186 * weight)
 
+      hour = hour + 1;
+    };
 
     var extraFractionHour = (0-tempCurrent)/(energyChangeHourly/(4.186 * weight));  //adjusts for fractional hour at end
     var timeComplete=(currentMinute/60)+(hour-1) - extraFractionHour;
     var time70 = .7* timeComplete; //time to freeze 70%, final answer
 
-    console.log(time70)
+    console.log('time70',time70)
     return time70;
 
 }
@@ -59,7 +61,7 @@ exports.index = function(req, res) {
 //extract information
     //go into WUNDERGROUND API, get estimated closest station, get tempterature forecast for the next 16 hours, make array [temp.hr1, temp. hr2...]
 
-
+  console.log('req,res',req,res)
 
   var apikey = 'f0978770121b8234';
   // var apikey = '68fc40cc59b03c11';
@@ -97,9 +99,9 @@ exports.index = function(req, res) {
       });
 
       //NOTE: tempArrays first temp field is vacant, not sure how to fix this) ///
-      calcTimeToCompletion(tempArray, 40);
+      var timeToFreeze = calcTimeToCompletion(tempArray, 40);
 
-      return res.json(200,response2.body)
+      return res.json(200,{time: timeToFreeze})
     })
 
   });
@@ -120,10 +122,68 @@ exports.show = function(req, res) {
 
 // Creates a new weather in the DB.
 exports.create = function(req, res) {
-  Weather.create(req.body, function(err, weather) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, weather);
+
+   // Weather.find(function (err, weathers) {
+  //   if(err) { return handleError(res, err); }
+  //   return res.json(200, weathers);
+  // });
+
+//extract information
+    //go into WUNDERGROUND API, get estimated closest station, get tempterature forecast for the next 16 hours, make array [temp.hr1, temp. hr2...]
+
+  console.log('req,res',req.body, typeof(req.body));
+  var parameters = req.body;
+  var apikey = 'f0978770121b8234';
+  // var apikey = '68fc40cc59b03c11';
+
+  var geoLookupUrl = "http://api.wunderground.com/api/"+apikey+"/geolookup/q/autoip.json";
+  var MinneapolisLookupUrl = "http://api.wunderground.com/api/"+apikey+"/geolookup/q/Minneapolis Crystal.json";
+  var demoUrl = "http://api.wunderground.com/api/"+apikey+"/q/CA/San_Francisco.json";
+
+
+//function to generate array of [temp time]
+  request(geoLookupUrl,function(request2,response2){
+    console.log('data: ', JSON.parse(response2.body).location.nearby_weather_stations.pws.station[0] )
+    var closestStation = JSON.parse(response2.body).location.nearby_weather_stations.pws.station[0];
+    var hourlyLookup = "http://api.wunderground.com/api/"+
+                        apikey+"/hourly10day/q/"+
+                        closestStation.state+"/"+
+                        closestStation.city+".json";
+    // console.log(hourlyLookup)
+
+    request(hourlyLookup,function(request3,response3){
+
+      var now = moment();
+      var endOfHour = now.endOf('hour');
+      var tempArray = [{
+        temp: '',
+        time: now.format()
+      }];
+      _.forEach(JSON.parse(response3.body).hourly_forecast,function(value){
+        // console.log(index)
+        var dataPoint = {
+          temp: value.temp.metric,
+          time: endOfHour.add(1, 'hours').format()
+        }
+        tempArray.push(dataPoint);
+      });
+      console.log('tempArray',tempArray)
+      //NOTE: tempArrays first temp field is vacant, not sure how to fix this) ///
+      var timeToFreeze = calcTimeToCompletion(tempArray, parameters.sizing.diameter, parameters.sizing.weight, parameters.sizing.length);
+
+      return res.json(200,{time:timeToFreeze})
+    })
+
   });
+
+
+
+
+
+  // Weather.create(req.body, function(err, weather) {
+  //   if(err) { return handleError(res, err); }
+  //   return res.json(201, weather);
+  // });
 };
 
 // Updates an existing weather in the DB.
